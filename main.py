@@ -2,14 +2,15 @@ import sys
 import random
 
 from PyQt5 import uic
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication, QWidget
 from PyQt5.QtGui import QPainter, QColor
+from UI import Ui_Form
 
 
-class MyWidget(QMainWindow):
+class MyWidget(QWidget, Ui_Form):
     def __init__(self):
         super().__init__()
-        uic.loadUi('UI.ui', self)
+        self.setupUi(self)
         self.setWindowTitle('circles')
         self.do_paint = False
         self.pushButton.clicked.connect(self.paint)
@@ -27,7 +28,7 @@ class MyWidget(QMainWindow):
 
     def draw_flag(self, qp):
         for i in range(random.randint(1, 10)):
-            qp.setBrush(QColor('yellow'))
+            qp.setBrush(QColor(random.randint(0, 255), random.randint(0, 255),random.randint(0, 255)))
             qp.drawEllipse(random.randint(0, 842), random.randint(0, 495), random.randint(0, 100),
                            random.randint(0, 100))
 
